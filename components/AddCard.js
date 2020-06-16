@@ -26,6 +26,18 @@ class AddCard extends React.Component {
             const deck= this.props.route.params.deckTitle
             const questionToBeAdded = { question,answer}
             addDeckCard(deck,questionToBeAdded).then(()=>this.setState({question:'',answer:''}))
+            Alert.alert(
+                'Success',
+                'Added Question to Deck',
+                [
+                  { text: 'Add More' },
+                  { 
+                      text: 'Back to Deck',
+                      onPress: () =>this.props.navigation.goBack(),
+                  },
+                ]
+                ,{ cancelable: false }
+            )
         }
     }
 
@@ -34,16 +46,18 @@ class AddCard extends React.Component {
             <View style={styles.container}>
                 <View style={styles.top}>
                     <TextInput
+                        style={styles.input}
                         label='Question'
                         value={this.state.question}
                         onChangeText={question => this.setState({ question })}
                     />                
                     <TextInput
+                        style={styles.input} 
                         label='Answer'
                         value={this.state.answer}
                         onChangeText={answer => this.setState({ answer })}
                     />
-                    <Button mode="contained" onPress={()=>this.addCardToDeck()}>
+                    <Button  mode="contained" onPress={()=>this.addCardToDeck()}>
                         Submit
                     </Button>
                 </View>                
@@ -58,11 +72,16 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+    //   paddingHorizontal:'2%'
       
     },
     top:{
         flex: 0.4,
         backgroundColor: '#fff',
         justifyContent:'flex-start',
+    },
+    input :{
+        // margin: "2%",
     }
+
   });

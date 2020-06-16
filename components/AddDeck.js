@@ -23,11 +23,13 @@ class AddDeck extends Component{
         else{
         const deckTitle=this.state.deckTitle.charAt(0).toUpperCase() + this.state.deckTitle.slice(1)
         saveDeckTitle(deckTitle).then(this.navigateToDetails)
+        
         }
         // getDecks().then(console.log)
     }
     navigateToDetails=()=>{
         this.props.navigation.navigate('Deck',{deckTitle:this.state.deckTitle})
+        this.setState({deckTitle:'',})
         // this.props.navigation.navigate('Deck')
     }
     render(){
